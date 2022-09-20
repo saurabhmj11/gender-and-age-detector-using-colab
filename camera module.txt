@@ -1,0 +1,17 @@
+File for Using laptop camera as input to detect gender and age 
+
+import cv2
+cap = cv2.VideoCapture('0')
+ret, frame = cap.read()
+frame_height, frame_width, _ = frame.shape
+out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+print("Processing Video...")
+while cap.isOpened():
+  ret, frame = cap.read()
+  if not ret:
+    out.release()
+    break
+  output = age_gender_detector(frame)
+  out.write(output)
+out.release()
+print("Done processing video")
